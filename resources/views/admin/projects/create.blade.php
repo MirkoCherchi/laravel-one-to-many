@@ -16,21 +16,33 @@
                 @error('title')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
-
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Descrizione</label>
                 <textarea name="description" class="form-control @error('description') is-invalid @enderror" id=""
-                    cols="30" rows="10" value="{{ old('description') }}"></textarea>
+                    cols="30" rows="10">{{ old('description') }}</textarea>
                 @error('description')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+
+            <div class="mb-3">
+                <label class="form-label">Tipo</label>
+                <select name="type_id" class="form-select @error('type_id') is-invalid @enderror">
+                    <option selected>Seleziona un tipo</option>
+                    @foreach ($types as $type)
+                        <option value="{{ $type->id }}" @if (old('type_id') == $type->id) selected @endif>
+                            {{ $type->title }}</option>
+                    @endforeach
+                </select>
+                @error('type_id')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
             <button type="submit" class="btn btn-success"><i class="fas fa-check"></i>
                 Inserisci</button>
-
-
         </form>
     </div>
 @endsection
